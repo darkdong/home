@@ -1,11 +1,442 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>我的个人主页</title>
+    <meta name="description" content="个人静态主页：简介、项目与联系方式。">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0a0a0a;
+            --panel: rgba(255, 255, 255, 0.035);
+            --text: rgba(255, 255, 255, 0.92);
+            --muted: rgba(255, 255, 255, 0.62);
+            --border: rgba(255, 255, 255, 0.09);
+            --brand: rgba(255, 255, 255, 0.86);
+            --brand2: rgba(255, 255, 255, 0.86);
+            --brand3: rgba(255, 255, 255, 0.86);
+            --shadow: 0 14px 48px rgba(0, 0, 0, 0.55);
+            --radius: 18px;
+            --max: 980px;
+        }
+
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background:
+                radial-gradient(900px 460px at 20% 0%, rgba(255, 255, 255, 0.06), transparent 58%),
+                linear-gradient(180deg, #070707, var(--bg));
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.75);
+            outline-offset: 2px;
+            border-radius: 10px;
+        }
+
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 28px 18px 60px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            background: rgba(10, 10, 10, 0.72);
+        }
+
+        .nav {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.86);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+        }
+
+        .links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .links a {
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            color: var(--muted);
+            transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+        }
+
+        .links a:hover {
+            color: var(--text);
+            text-decoration: none;
+            border-color: var(--border);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .hero {
+            margin-top: 26px;
+            padding: 26px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.035);
+            box-shadow: var(--shadow);
+        }
+
+        .title {
+            margin: 0 0 10px;
+            font-size: clamp(26px, 4vw, 42px);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .subtitle {
+            margin: 0;
+            color: var(--muted);
+            font-size: 16px;
+            max-width: 70ch;
+        }
+
+        .cta {
+            margin-top: 16px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.035);
+            color: var(--text);
+            text-decoration: none;
+            transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+        }
+
+        .btn.primary {
+            border-color: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.92);
+            color: rgba(0, 0, 0, 0.88);
+            font-weight: 650;
+        }
+
+        .btn:hover {
+            text-decoration: none;
+            border-color: rgba(255, 255, 255, 0.20);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn.primary:hover {
+            border-color: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.88);
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 920px) {
+            main { grid-template-columns: 1fr; }
+        }
+
+        section, aside {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.030);
+            padding: 18px;
+        }
+
+        h2 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            letter-spacing: 0.2px;
+            color: rgba(255, 255, 255, 0.86);
+        }
+
+        p { margin: 0 0 10px; color: var(--muted); }
+        p strong { color: var(--text); }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .chip {
+            font-size: 13px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.03);
+            transition: border-color 160ms ease, color 160ms ease, background 160ms ease;
+        }
+
+        .chip:hover {
+            border-color: rgba(255, 255, 255, 0.18);
+            color: rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .card {
+            padding: 12px 12px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            transition: border-color 160ms ease, background 160ms ease;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .card a { text-decoration: none; }
+        .card a:hover { text-decoration: underline; }
+
+        .card-title {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 0 0 6px;
+        }
+
+        .card-title span {
+            font-weight: 650;
+            color: var(--text);
+        }
+
+        .card-title small {
+            color: var(--muted);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .kv {
+            display: grid;
+            gap: 8px;
+            margin: 0;
+        }
+
+        .kv div {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            transition: border-color 160ms ease, background 160ms ease;
+        }
+
+        .kv div:hover {
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .kv dt { color: var(--muted); }
+        .kv dd { margin: 0; color: var(--text); font-weight: 550; }
+
+        footer {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 13px;
+        }
+    </style>
 </head>
 <body>
-    <h1>你好，GitHub Pages！</h1>
-    <p>这是我的第一个静态主页。</p>
+    <header>
+        <div class="nav">
+            <div class="brand" aria-label="站点标题">
+                <span class="dot" aria-hidden="true"></span>
+                <span>Dark Dong</span>
+            </div>
+            <nav class="links" aria-label="页面导航">
+                <a href="#about">关于</a>
+                <a href="#projects">项目</a>
+                <a href="#contact">联系</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="wrap">
+        <div class="hero">
+            <h1 class="title">你好，我是Dark</h1>
+            <p class="subtitle"> 我是一个男人（宁折不弯，纯爷们儿），一个软件工程师（热爱编程，对技术充满热情），一个极端音乐爱好者（也没那么极端，还是旋律为尊）。</p>
+            <div class="cta">
+                <a class="btn primary" href="#contact">联系我</a>
+                <a class="btn" href="https://github.com/darkdong" target="_blank" rel="noreferrer">GitHub</a>
+                <a class="btn" href="https://www.linkedin.com/in/yourname" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+        </div>
+
+        <main>
+            <section id="about" aria-label="关于我">
+                <h2>关于我</h2>
+                <p>我是一名<strong>软件工程师</strong>，目前在做<strong>前端 / 全栈</strong>相关的事情。</p>
+                <p>我喜欢优雅的代码，简洁的美。</p>
+                <div class="chips" aria-label="技能标签">
+                    <span class="chip">Dart/Flutter</span>
+                    <span class="chip">C/C++</span>
+                    <span class="chip">Python</span>
+                    <span class="chip">TypeScript</span>
+                    <span class="chip">Golang</span>
+                    <span class="chip">Rust</span>
+                    <span class="chip">Solidity</span>
+                    <span class="chip">Swift</span>
+                    <span class="chip">Kotlin</span>
+                    <span class="chip">Objective-C</span>
+                </div>
+            </section>
+
+            <aside aria-label="快速信息">
+                <h2>信息</h2>
+                <dl class="kv">
+                    <div>
+                        <dt>所在地</dt>
+                        <dd>北京</dd>
+                    </div>
+                    <div>
+                        <dt>方向</dt>
+                        <dd>前端 / 全栈</dd>
+                    </div>
+                    <div>
+                        <dt>状态</dt>
+                        <dd>开放合作</dd>
+                    </div>
+                </dl>
+            </aside>
+
+            <section id="projects" aria-label="项目展示">
+                <h2>项目</h2>
+                <div class="list">
+                    <!-- <div class="card">
+                        <div class="card-title">
+                            <span><a href="https://github.com/yourname/project-1" target="_blank" rel="noreferrer">项目一：项目名称</a></span>
+                            <small>2026</small>
+                        </div>
+                        <p>用一句话说明项目做什么、亮点是什么（比如性能提升、稳定性、易用性）。</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">
+                            <span><a href="https://github.com/yourname/project-2" target="_blank" rel="noreferrer">项目二：项目名称</a></span>
+                            <small>2025</small>
+                        </div>
+                        <p>用一句话说明你的贡献、采用了哪些技术、解决了什么问题。</p>
+                    </div> -->
+
+                    <div class="card">
+                        <div class="card-title">
+                            <span><a href="#" target="_blank" rel="noreferrer">暗黑斗地主</a></span>
+                            <small>进行中</small>
+                        </div>
+                        <p>第一个作品，牛刀小试，随便玩玩。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" aria-label="联系方式">
+                <h2>联系我</h2>
+                <p>欢迎交流合作：工作机会、外包项目、技术讨论或者聊聊音乐。</p>
+                <div class="list">
+                    <div class="card">
+                        <div class="card-title">
+                            <span>QQ</span>
+                            <!-- <small class="mono">优先</small> -->
+                        </div>
+                        <p class="mono">1947214</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">
+                            <span>邮箱</span>
+                            <!-- <small class="mono">优先</small> -->
+                        </div>
+                        <p><a class="mono" href="mailto:viva@163.com">viva@163.com</a></p>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">
+                            <span>微信</span>
+                            <!-- <small class="mono">可选</small> -->
+                        </div>
+                        <p class="mono">dreamstorm</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">
+                            <span>其他链接</span>
+                            <small class="mono">社交</small>
+                        </div>
+                        <p>
+                            <a href="https://github.com/darkdong" target="_blank" rel="noreferrer">GitHub</a>
+                            ·
+                            <a href="https://twitter.com/darkdong" target="_blank" rel="noreferrer">X/Twitter</a>
+                            ·
+                            <a href="https://juejin.cn/user/darkdong" target="_blank" rel="noreferrer">掘金</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <span>© <span id="year"></span> Dark Dong · Built with pure HTML/CSS</span>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById("year").textContent = String(new Date().getFullYear());
+    </script>
 </body>
 </html>
