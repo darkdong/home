@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>隐私政策</title>
+    <meta name="description" content="隐私政策：此应用如何处理用户数据。">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0a0a0a;
+            --panel: rgba(255, 255, 255, 0.035);
+            --text: rgba(255, 255, 255, 0.92);
+            --muted: rgba(255, 255, 255, 0.62);
+            --border: rgba(255, 255, 255, 0.09);
+            --shadow: 0 14px 48px rgba(0, 0, 0, 0.55);
+            --radius: 18px;
+            --max: 980px;
+        }
+
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #070707, var(--bg));
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        a:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.75);
+            outline-offset: 2px;
+            border-radius: 10px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            background: rgba(10, 10, 10, 0.72);
+        }
+
+        .nav {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.86);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+        }
+
+        .links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .links a {
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            color: var(--muted);
+            transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+        }
+
+        .links a:hover {
+            color: var(--text);
+            text-decoration: none;
+            border-color: var(--border);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 28px 18px 60px;
+        }
+
+        .hero {
+            margin-top: 26px;
+            padding: 26px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.035);
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(22px, 3.2vw, 34px);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .meta {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        section {
+            margin-top: 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.030);
+            padding: 18px;
+        }
+
+        h2 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            letter-spacing: 0.2px;
+            color: rgba(255, 255, 255, 0.86);
+        }
+
+        p { margin: 0 0 10px; color: var(--muted); }
+        ul { margin: 0; padding-left: 18px; color: var(--muted); }
+        li { margin: 6px 0; }
+
+        footer {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav">
+            <div class="brand" aria-label="站点标题">
+                <span class="dot" aria-hidden="true"></span>
+                <span>Dark Dong</span>
+            </div>
+            <nav class="links" aria-label="页面导航">
+                <a href="./index.html">主页</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="wrap">
+        <div class="hero">
+            <h1>隐私政策</h1>
+            <p class="meta">最后更新：2026-05-08</p>
+            <p>本隐私政策用于说明应用（例如“暗黑斗地主”）以及本网站如何处理你的信息。若你对某条款有疑问，可通过下方联系方式联系我们。</p>
+        </div>
+
+        <section aria-label="信息收集">
+            <h2>我们收集哪些信息</h2>
+            <p>我们尽量减少数据收集。根据你使用功能的不同，可能涉及以下信息：</p>
+            <ul>
+                <li>你主动提供的信息：例如你通过邮件/社交方式联系我们时提供的联系方式与沟通内容。</li>
+                <li>设备与诊断信息：为改进稳定性，系统或第三方服务可能会提供匿名的崩溃日志、性能与诊断数据（不用于识别你的真实身份）。</li>
+                <li>使用数据：在你明确启用统计分析或使用需要联网的功能时，可能会产生匿名的使用统计数据。</li>
+            </ul>
+        </section>
+
+        <section aria-label="信息使用">
+            <h2>我们如何使用信息</h2>
+            <ul>
+                <li>用于提供与维护应用功能、修复故障与改进体验。</li>
+                <li>用于响应你的咨询、反馈与支持请求。</li>
+                <li>用于满足合规要求与防止滥用（仅在必要范围内）。</li>
+            </ul>
+        </section>
+
+        <section aria-label="信息共享">
+            <h2>我们是否共享信息</h2>
+            <p>我们不会出售你的个人信息。仅在以下情况下可能共享：</p>
+            <ul>
+                <li>为提供服务所必需的第三方：例如崩溃分析/日志服务（如你启用或系统提供）。</li>
+                <li>法律法规要求或合理必要的合规场景。</li>
+            </ul>
+        </section>
+
+        <section aria-label="数据存储与安全">
+            <h2>数据存储与安全</h2>
+            <p>我们采用合理的技术与组织措施保护数据安全，但无法保证绝对安全。你应妥善保管你的设备与账户信息（如有）。</p>
+        </section>
+
+        <section aria-label="你的权利">
+            <h2>你的权利</h2>
+            <ul>
+                <li>你可以随时停止使用应用。</li>
+                <li>如你曾向我们提供可识别信息（例如邮件联系），你可以通过邮箱联系我们请求更正或删除相关信息（在法律允许范围内）。</li>
+            </ul>
+        </section>
+
+        <section aria-label="联系我们">
+            <h2>联系我们</h2>
+            <p>如有任何隐私相关问题，请联系：</p>
+            <p class="mono"><a href="mailto:viva@163.com">viva@163.com</a></p>
+        </section>
+
+        <footer>
+            <span>© 2026 Dark Dong · <a href="./index.html">返回主页</a></span>
+        </footer>
+    </div>
+</body>
+</html>
